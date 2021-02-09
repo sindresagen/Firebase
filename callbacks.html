@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -11,12 +11,11 @@
     <script>
         var infoDiv = document.getElementById('info');
         function orderPizza() {
-            makePizza(myCallbackFunction);
+        //     makePizza(function (pizza){
+        //     infoDiv.innerHTML = pizza;
+        // });
+            makePizza(pizza => infoDiv.innerHTML = pizza);
              
-        }
-
-        function myCallbackFunction(pizza){
-            infoDiv.innerHTML = pizza;
         }
 
         function makePizza(callback) {
@@ -25,5 +24,65 @@
         }
     </script>
     
+</body>
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="orderPizza()">Bestill pizza</button>
+    <div id="info"></div>
+    <script>
+        var infoDiv = document.getElementById('info');
+        function orderPizza() {
+            makePizza()
+                    .then(pizza => infoDiv.innerHTML = pizza)
+                    .catch(error => alert(error))
+             
+        }
+
+        function makePizza(callback) {
+            var pizza = `<img width="300" src="https://cdn.pixabay.com/photo/2016/07/10/16/05/pizza-1507939_1280.png"></img>`;
+            return new Promise((resolve, reject) => resolve(pizza)//reject('feil!')
+            );
+            }; 
+        
+    </script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="orderPizza()">Bestill pizza</button>
+    <div id="info"></div>
+    <script>
+        var infoDiv = document.getElementById('info');
+        async function orderPizza() {
+            try {
+                var pizza = await makePizza();
+                infoDiv.innerHTML = pizza;
+            }
+            catch(error) {
+                infoDiv.innerHTML = error;
+            }
+        }
+
+        function makePizza(callback) {
+            var pizza = `<img width="300" src="https://cdn.pixabay.com/photo/2016/07/10/16/05/pizza-1507939_1280.png"></img>`;
+            return new Promise((resolve, reject) => reject('Feil!'));
+            }; 
+        
+    </script>
 </body>
 </html>
